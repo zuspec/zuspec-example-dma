@@ -1,0 +1,15 @@
+
+package:
+  name: zuspec-example-dma
+
+  dep-sets:
+  - name: default-dev
+    deps: 
+    - name: sphinx
+      src: pypi
+    - name: sphinxcontrib-mermaid
+      src: pypi
+    - name: myst-parser
+      src: pypi
+    - name: zuspec
+      url: https://github.com/zuspec/zuspec.git
