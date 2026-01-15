@@ -88,7 +88,7 @@ The following Python packages are required for documentation generation:
    - Source: https://github.com/zuspec/zuspec.git (HTTPS)
    - Purpose: Core verification framework for the DMA example
    - Note: This is a git repository dependency that will be cloned during `ivpm update`
-   - Known Issue: IVPM may attempt to use SSH (git@github.com) instead of HTTPS, which can cause authentication failures if SSH keys are not configured
+   - Installation note: If git clone fails, the workaround above provides alternative installation methods
 
 ### Implicitly Installed Dependencies
 
@@ -159,13 +159,13 @@ The built documentation will be available in `docs/spec/_build/html/`.
 
 ## Troubleshooting
 
-### Git SSH Authentication Issues
+### Git Clone Failures
 
-If `ivpm update` fails with Git SSH errors, ensure:
-1. Git is configured with appropriate credentials
-2. SSH keys are set up for GitHub if IVPM attempts to use SSH protocol
-3. Alternatively, use the manual installation workaround above to install Python packages directly
-4. HTTPS URLs are properly configured in `ivpm.yaml` (note: IVPM may still attempt SSH cloning)
+If `ivpm update` fails when cloning git repositories:
+1. Verify Git is installed and configured
+2. Check network connectivity to the repository
+3. If authentication is required, ensure appropriate credentials are configured
+4. Use the manual installation workaround above to install Python packages directly
 
 ### Missing Dependencies
 
@@ -189,7 +189,7 @@ After running the initialization process, the following components are installed
 
 ### Not Installed
 
-- **zuspec** - Git-based dependency (requires SSH authentication configuration)
+- **zuspec** - Git-based dependency (installation encountered issues during testing but not required for documentation)
 - **svdep** - Not included in project dependencies (not required)
 
 ### Verification Performed
