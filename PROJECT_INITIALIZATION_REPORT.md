@@ -26,7 +26,8 @@ The project defines the following dependencies in the `default-dev` dep-set:
 
 #### Git Repositories:
 4. **zuspec** - Core zuspec library
-   - URL: https://github.com/zuspec/zuspec.git
+   - URL (as configured): https://github.com/zuspec/zuspec.git
+   - Actual clone attempt: git@github.com:zuspec/zuspec.git (SSH format)
    - Status: ⚠️ Failed to clone (SSH authentication required)
 
 ### 4. Results
@@ -55,7 +56,7 @@ The following Python packages were successfully installed in the `packages/pytho
 
 #### Failed to Install:
 - **zuspec** - The main dependency failed to install because:
-  - The ivpm.yaml file specifies a Git URL using SSH protocol (git@github.com:zuspec/zuspec.git)
+  - Although ivpm.yaml specifies an HTTPS URL (https://github.com/zuspec/zuspec.git), ivpm converted it to SSH format (git@github.com:zuspec/zuspec.git)
   - SSH authentication is not configured in this environment
   - This prevents the full project initialization from completing
 
@@ -105,16 +106,16 @@ zuspec-example-dma/
 
 To fully initialize the project:
 
-1. **Option 1 - Update ivpm.yaml**: Change the zuspec URL in ivpm.yaml from SSH to HTTPS:
-   ```yaml
-   - name: zuspec
-     url: https://github.com/zuspec/zuspec.git
+1. **Option 1 - Fix ivpm Configuration**: The ivpm tool appears to be converting HTTPS URLs to SSH format. Investigate ivpm configuration or ensure the URL is being passed correctly.
+
+2. **Option 2 - Configure SSH**: Set up SSH keys for GitHub access to allow the git clone operation to succeed with SSH protocol.
+
+3. **Option 3 - Manual Clone**: Manually clone the zuspec repository into the packages directory using HTTPS:
+   ```bash
+   cd packages
+   git clone https://github.com/zuspec/zuspec.git
    ```
-
-2. **Option 2 - Configure SSH**: Set up SSH keys for GitHub access
-
-3. **Option 3 - Manual Clone**: Manually clone the zuspec repository into the packages directory
 
 ## Conclusion
 
-The project was partially initialized using `uvx ivpm`. All PyPI dependencies were successfully installed, but the main `zuspec` dependency failed due to SSH authentication requirements. The project uses **ivpm** for dependency management, not svdep. To complete the initialization, the zuspec repository URL needs to be changed to HTTPS or SSH authentication needs to be configured.
+The project was partially initialized using `uvx ivpm`. All PyPI dependencies were successfully installed, but the main `zuspec` dependency failed because ivpm converted the HTTPS URL to SSH format, which requires authentication not available in this environment. The project uses **ivpm** for dependency management, not svdep. To complete the initialization, either configure SSH authentication, investigate ivpm's URL conversion behavior, or manually clone the zuspec repository.
