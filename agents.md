@@ -31,6 +31,15 @@ This command will:
 - Fetch all source dependencies specified in `ivpm.yaml`
 - Install all specified Python package dependencies
 
+**Note:** If the `ivpm update` command fails due to Git SSH authentication issues (particularly with the `zuspec` dependency), you can manually install the required Python packages:
+
+```bash
+source packages/python/bin/activate
+pip install sphinx sphinxcontrib-mermaid myst-parser
+```
+
+This workaround ensures that the documentation tools are available even if the Git-based dependency fetch fails.
+
 ### 3. Activate the Virtual Environment
 
 After initialization, activate the virtual environment:
@@ -155,6 +164,33 @@ If packages are missing after `ivpm update`:
 2. Try updating again: `ivpm update`
 3. Manually install missing packages: `pip install <package-name>`
 
+## Current Installation Status
+
+After running the initialization process, the following components are installed and verified:
+
+### Successfully Installed
+
+- **IVPM 2.3.0** - Package manager installed and functional
+- **Python Virtual Environment** - Created at `packages/python/`
+- **Sphinx 8.2.3** - Documentation generator
+- **MyST Parser 4.0.1** - Markdown parser for Sphinx
+- **sphinxcontrib-mermaid 2.0.0** - Mermaid diagram support
+- **sphinx contrib extensions** - applehelp, devhelp, htmlhelp, jsmath, qthelp, serializinghtml
+
+### Not Installed
+
+- **zuspec** - Git-based dependency (requires SSH authentication configuration)
+- **svdep** - Not included in project dependencies (not required)
+
+### Verification Performed
+
+- ✅ Virtual environment created successfully
+- ✅ Documentation packages installed
+- ✅ Documentation builds successfully (`make html` in `docs/spec/`)
+- ✅ All Sphinx extensions functional
+- ❌ zuspec package (requires additional Git configuration)
+- ❌ svdep (not a project dependency)
+
 ## Summary
 
 - **Initialization Tool:** IVPM (IP and Verification Package Manager)
@@ -162,3 +198,4 @@ If packages are missing after `ivpm update`:
 - **Virtual Environment Location:** `packages/python/`
 - **svdep Status:** Not loaded, not required for current project scope
 - **Primary Use Case:** Documentation generation and verification framework development
+- **Documentation Build:** Fully functional and tested
