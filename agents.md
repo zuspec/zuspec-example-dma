@@ -31,11 +31,19 @@ This command will:
 - Fetch all source dependencies specified in `ivpm.yaml`
 - Install all specified Python package dependencies
 
-**Note:** If the `ivpm update` command fails due to Git SSH authentication issues (particularly with the `zuspec` dependency), you can manually install the required Python packages:
+**Note:** If the `ivpm update` command fails due to Git authentication issues (particularly with the `zuspec` dependency), you have two options:
 
+**Option A - If virtual environment was created:**
 ```bash
 source packages/python/bin/activate
 pip install sphinx sphinxcontrib-mermaid myst-parser
+```
+
+**Option B - If virtual environment creation failed:**
+```bash
+python3 -m venv packages/python
+source packages/python/bin/activate
+pip install ivpm sphinx sphinxcontrib-mermaid myst-parser
 ```
 
 This workaround ensures that the documentation tools are available even if the Git-based dependency fetch fails.
@@ -77,9 +85,10 @@ The following Python packages are required for documentation generation:
 ### Git-based Dependencies
 
 4. **zuspec** - Zuspec verification framework
-   - Source: https://github.com/zuspec/zuspec.git
+   - Source: https://github.com/zuspec/zuspec.git (HTTPS)
    - Purpose: Core verification framework for the DMA example
    - Note: This is a git repository dependency that will be cloned during `ivpm update`
+   - Known Issue: IVPM may attempt to use SSH (git@github.com) instead of HTTPS, which can cause authentication failures if SSH keys are not configured
 
 ### Implicitly Installed Dependencies
 
@@ -154,8 +163,9 @@ The built documentation will be available in `docs/spec/_build/html/`.
 
 If `ivpm update` fails with Git SSH errors, ensure:
 1. Git is configured with appropriate credentials
-2. SSH keys are set up for GitHub if using SSH URLs
-3. HTTPS URLs are properly configured in `ivpm.yaml`
+2. SSH keys are set up for GitHub if IVPM attempts to use SSH protocol
+3. Alternatively, use the manual installation workaround above to install Python packages directly
+4. HTTPS URLs are properly configured in `ivpm.yaml` (note: IVPM may still attempt SSH cloning)
 
 ### Missing Dependencies
 
