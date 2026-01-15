@@ -142,7 +142,7 @@ pip list
 # Verify key tools are available
 sphinx-build --version
 python -c "import myst_parser"
-python -c "import sphinxcontrib.mermaid"
+python -c "import sphinxcontrib.mermaid; print('All documentation packages installed successfully')"
 ```
 
 ## Building Documentation
@@ -185,7 +185,7 @@ After running the initialization process, the following components are installed
 - **Sphinx 8.2.3** - Documentation generator
 - **MyST Parser 4.0.1** - Markdown parser for Sphinx
 - **sphinxcontrib-mermaid 2.0.0** - Mermaid diagram support
-- **sphinx contrib extensions** - applehelp, devhelp, htmlhelp, jsmath, qthelp, serializinghtml
+- **sphinxcontrib extensions** - applehelp, devhelp, htmlhelp, jsmath, qthelp, serializinghtml
 
 ### Not Installed
 
