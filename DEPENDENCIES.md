@@ -97,8 +97,11 @@ pip install ivpm
 # Update dependencies defined in ivpm.yaml
 ivpm update -a
 
-# Activate the environment
-source packages/python/activate
+# Activate the environment (bash/zsh)
+. packages/python/activate
+
+# Or on Windows
+packages\python\activate.bat
 ```
 
 ## Build and Documentation Commands
@@ -106,12 +109,16 @@ source packages/python/activate
 Based on the project structure:
 
 ```bash
-# Build HTML documentation
+# Build HTML documentation (from repository root)
 cd docs/spec
 make html
 
-# Or using sphinx-build directly
+# Or using sphinx-build directly from repository root
 sphinx-build -b html docs/spec docs/spec/_build/html
+
+# Or from within docs/spec directory
+cd docs/spec
+sphinx-build -b html . _build/html
 ```
 
 ## Dependency Set Structure
@@ -130,4 +137,4 @@ As the project evolves, consider adding:
 
 ## Last Updated
 
-2026-01-15
+January 2026
