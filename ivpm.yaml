@@ -13,3 +13,7 @@ package:
       src: pypi
     - name: zuspec
       url: https://github.com/zuspec/zuspec.git
+  - name: default
+    deps:
+    - name: zuspec
+      src: pypi
